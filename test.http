@@ -1,0 +1,42 @@
+
+
+GET http://localhost:5000/api/products
+x-api-key: SALAH
+Accept: application/json
+
+
+### CREAT NEW PRODUCT
+
+POST http://localhost:5000/api/products
+x-api-key: RAHASIA
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "BACOK KERAS",
+  "price": 10000000,
+  "description": "Laptop Gaming RAM 16GB SSD 1TB"
+}
+
+### UPDATE PRODUCT
+PUT http://localhost:5000/api/products/6
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": 19000000,
+  "description": "Laptop Gaming RAM 8GB SSD 1TB"
+}
+
+### GET PRODUCT BY ID
+GET http://localhost:5000/api/products/9
+Accept: application/json
+
+
+### DELETE PRODUCT
+DELETE http://localhost:5000/api/products/2
+Accept: application/json
+
+
+GET
