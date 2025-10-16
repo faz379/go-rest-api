@@ -3,6 +3,7 @@ package exception
 import (
 	"belajar-rest-api-golang/helper"
 	"belajar-rest-api-golang/model/web"
+	"fmt"
 	"net/http"
 
 	"github.com/go-playground/validator/v10"
@@ -27,17 +28,31 @@ func validationErrors(writer http.ResponseWriter, request *http.Request, err int
 		writer.Header().Set("Content-Type", "application/json")
 		writer.WriteHeader(http.StatusBadRequest)
 
+		var message string
+		for _, e := range exception {
+			switch e.Field() {
+			case "Username":
+				message = "Username tidak boleh kosong"
+			case "Email":
+				message = "Email tidak boleh kosong"
+			case "Password":
+				message = "Password tidak boleh kosong"
+			default:
+				message = fmt.Sprintf("%s tidak valid", e.Field())
+			}
+			break
+		}
+
 		webResponse := web.WebResponse{
 			Code:   http.StatusBadRequest,
-			Status: "BAD REQUEST",
-			Data:   exception.Error(),
+			Status: "Bad Request",
+			Data:   message,
 		}
 
 		helper.WriteToResponseBody(writer, webResponse)
 		return true
-	} else {
-		return false
 	}
+	return false
 }
 
 func notFoundError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {

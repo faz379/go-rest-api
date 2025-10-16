@@ -10,27 +10,35 @@ import (
 	"fmt"
 	"net/http"
 
-	_ "github.com/go-sql-driver/mysql"
-
 	"github.com/go-playground/validator/v10"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-
+	// ====== INISIALISASI DASAR ======
 	db := app.NewDB()
 	validate := validator.New()
+
+	// ====== PRODUCT SETUP ======
 	productRepository := repository.NewProductRepository()
 	productService := service.NewProductService(productRepository, db, validate)
 	productController := controller.NewProductController(productService)
 
-	router := app.NewRouter(productController)
+	// ====== USER SETUP ======
+	userRepository := repository.NewUserRepository()
+	userService := service.NewUserService(userRepository, db, validate)
+	userController := controller.NewUserController(userService)
 
+	// ====== ROUTER SETUP ======
+	router := app.NewRouter(productController, userController)
+
+	// ====== SERVER SETUP ======
 	server := http.Server{
 		Addr:    "localhost:5000",
 		Handler: middleware.NewAuthMiddleware(router),
 	}
 
-	fmt.Println("Server running on:", server.Addr)
+	fmt.Println("Server running at http://localhost:5000")
 	err := server.ListenAndServe()
 	helper.PanicIfError(err)
 }

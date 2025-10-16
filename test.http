@@ -1,8 +1,29 @@
 
 
 GET http://localhost:5000/api/products
-x-api-key: SALAH
+Authorization: Bearer <eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MDczMTU4MCwiaWF0IjoxNzYwNjQ1MTgwfQ.IkbhGtRq7BktZb8w45kyq98LWU9pdVfWd4DnVwaZ70w>
 Accept: application/json
+### REGISTER USER
+
+POST http://localhost:5000/api/users/register
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "alsya123",
+  "email": "alsya007@gmail.com",
+  "password": "alsya123"
+}
+
+### LOGIN USER
+POST http://localhost:5000/api/users/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "alsya007@gmail.com",
+  "password": "alsya123"
+}
 
 
 ### CREAT NEW PRODUCT
