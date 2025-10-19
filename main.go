@@ -20,9 +20,9 @@ func main() {
 	validate := validator.New()
 
 	// ====== PRODUCT SETUP ======
-	productRepository := repository.NewProductRepository()
-	productService := service.NewProductService(productRepository, db, validate)
-	productController := controller.NewProductController(productService)
+	postRepository := repository.NewPostRepository()
+	postService := service.NewPostService(postRepository, db, validate)
+	postController := controller.NewPostController(postService)
 
 	// ====== USER SETUP ======
 	userRepository := repository.NewUserRepository()
@@ -30,7 +30,7 @@ func main() {
 	userController := controller.NewUserController(userService)
 
 	// ====== ROUTER SETUP ======
-	router := app.NewRouter(productController, userController)
+	router := app.NewRouter(postController, userController)
 
 	// ====== SERVER SETUP ======
 	server := http.Server{

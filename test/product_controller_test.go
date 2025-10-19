@@ -30,11 +30,14 @@ func setupTestDB() *sql.DB {
 func setupRouter() http.Handler {
 	db := setupTestDB()
 	validate := validator.New()
-	productRepository := repository.NewProductRepository()
-	productService := service.NewProductService(productRepository, db, validate)
-	productController := controller.NewProductController(productService)
+	postRepository := repository.NewPostRepository()
+	postService := service.NewPostService(postRepository, db, validate)
+	postController := controller.NewPostController(postService)
+	userRepository := repository.NewUserRepository()
+	userService := service.NewUserService(userRepository, db, validate)
+	userController := controller.NewUserController(userService)
 
-	router := app.NewRouter(productController)
+	router := app.NewRouter(postController, userController)
 	return middleware.NewAuthMiddleware(router)
 }
 

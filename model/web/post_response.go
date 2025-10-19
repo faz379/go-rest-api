@@ -1,0 +1,13 @@
+package web
+
+/*
+product response untuk response yang dikirim ke client
+sehingga jika ada data yang sensitif tidak perlu dikirim ke client
+*/
+type PostResponse struct {
+	Id       int    `json:"id"`
+	Title    string `json:"title"`
+	Content  string `json:"content"`
+	ImageURL string `json:"image_url"`
+	AuthorId int    `json:"author_id"`
+}

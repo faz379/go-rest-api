@@ -32,13 +32,13 @@ func validationErrors(writer http.ResponseWriter, request *http.Request, err int
 		for _, e := range exception {
 			switch e.Field() {
 			case "Username":
-				message = "Username tidak boleh kosong"
+				message = "Username cannot be empty"
 			case "Email":
-				message = "Email tidak boleh kosong"
+				message = "Email cannot be empty"
 			case "Password":
-				message = "Password tidak boleh kosong"
+				message = "Password cannot be empty"
 			default:
-				message = fmt.Sprintf("%s tidak valid", e.Field())
+				message = fmt.Sprintf("%s cannot be empty", e.Field())
 			}
 			break
 		}
@@ -63,7 +63,7 @@ func notFoundError(writer http.ResponseWriter, request *http.Request, err interf
 
 		webResponse := web.WebResponse{
 			Code:   http.StatusNotFound,
-			Status: "NOT FOUND",
+			Status: "Not found",
 			Data:   exception.Error,
 		}
 
@@ -81,7 +81,7 @@ func internalServerError(writer http.ResponseWriter, request *http.Request, err 
 
 	webResponse := web.WebResponse{
 		Code:   http.StatusInternalServerError,
-		Status: "INTERNAL SERVER ERROR",
+		Status: "Internal Server Error",
 		Data:   err,
 	}
 

@@ -8,7 +8,7 @@ import (
 
 // ProductController is an interface for handling product-related HTTP requests.
 
-type ProductController interface {
+type PostController interface {
 	Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
 	Update(writer http.ResponseWriter, request *http.Request, params httprouter.Params)
 	Delete(writer http.ResponseWriter, request *http.Request, params httprouter.Params)

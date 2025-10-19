@@ -1,7 +1,7 @@
 
 
-GET http://localhost:5000/api/products
-Authorization: Bearer <eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MDczMTU4MCwiaWF0IjoxNzYwNjQ1MTgwfQ.IkbhGtRq7BktZb8w45kyq98LWU9pdVfWd4DnVwaZ70w>
+GET http://localhost:5000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MDk5ODI2OSwiaWF0IjoxNzYwOTExODY5fQ.eGi_i6IHgqfU5tKjbQy5ZCme7vy3-71-W_55dvK6RnI
 Accept: application/json
 ### REGISTER USER
 
@@ -28,15 +28,15 @@ Content-Type: application/json
 
 ### CREAT NEW PRODUCT
 
-POST http://localhost:5000/api/products
-x-api-key: RAHASIA
+POST http://localhost:5000/api/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MDk5ODI2OSwiaWF0IjoxNzYwOTExODY5fQ.eGi_i6IHgqfU5tKjbQy5ZCme7vy3-71-W_55dvK6RnI
 Accept: application/json
 Content-Type: application/json
 
 {
-  "name": "BACOK KERAS",
-  "price": 10000000,
-  "description": "Laptop Gaming RAM 16GB SSD 1TB"
+  "title": "",
+  "content": "ASFBASOIVBASVNBIASNVSANVPOANSVPOSANV",
+  "image_url": "www.image.com/alsya.jpg"
 }
 
 ### UPDATE PRODUCT
@@ -59,5 +59,13 @@ Accept: application/json
 DELETE http://localhost:5000/api/products/2
 Accept: application/json
 
+### CREATE NEW POST
+PUT http://localhost:5000/api/posts/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MDk5ODI2OSwiaWF0IjoxNzYwOTExODY5fQ.eGi_i6IHgqfU5tKjbQy5ZCme7vy3-71-W_55dvK6RnI
+Content-Type: application/json
 
-GET
+{
+  "title": "SAHRONI MASUK KADANG",
+  "content": "ASFBASOIVBASVNBIASNVSANVPOANSVPOSANV",
+  "image_url": "www.image.com/alsya.jpg"
+}
