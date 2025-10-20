@@ -62,10 +62,10 @@ Content-Type: application/json
 }
 
 ### CREATE COMMENT
-POST http://localhost:5000/api/posts/2/comments
+POST http://localhost:5000/api/posts/1/comments
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTA4MTM4MCwiaWF0IjoxNzYwOTk0OTgwfQ.BkFRIouLDzczouD3cKIAulU6oVFmWAzkTeQpYM5prgs
 Content-Type: application/json
 
 {
-  "content": "WOKWOKWOWKOWKOWK"
+  "content": "WOKWOKWOWKOWKOWKJAJAJAJAhahah"
 }

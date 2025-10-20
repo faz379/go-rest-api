@@ -20,7 +20,7 @@ func GenerateToken(userId int, duration time.Duration) (string, error) {
 	claims := &JwtCustomClaims{
 		UserId: userId,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(duration)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(2 * time.Hour)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 			Issuer:    "belajar-rest-api-golang",
 		},
