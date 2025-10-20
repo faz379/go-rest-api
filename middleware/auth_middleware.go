@@ -5,6 +5,7 @@ import (
 	"belajar-rest-api-golang/model/web"
 	"context"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -68,8 +69,7 @@ func (middleware *AuthMiddleware) ServeHTTP(writer http.ResponseWriter, request 
 	tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 
 	// Define your JWT secret key
-	secretKey := []byte("a99NU0T8VMlTD3SUdQcQEbUZs4IxpFrEM8NVW7GXo1g=")
-
+	secretKey := []byte(os.Getenv("JWT_SECRET"))
 	// Parse and validate JWT token
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {

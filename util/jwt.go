@@ -3,12 +3,13 @@ package util
 import (
 	"belajar-rest-api-golang/helper"
 	"errors"
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var JwtSecret = []byte("a99NU0T8VMlTD3SUdQcQEbUZs4IxpFrEM8NVW7GXo1g=")
+var JwtSecret = []byte(os.Getenv("JWT_SECRET"))
 
 type JwtCustomClaims struct {
 	UserId int `json:"user_id"`

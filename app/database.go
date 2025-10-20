@@ -3,11 +3,28 @@ package app
 import (
 	"belajar-rest-api-golang/helper"
 	"database/sql"
+	"fmt"
+	"os"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
 func NewDB() *sql.DB {
-	db, err := sql.Open("mysql", "root:alsya12345@tcp(localhost:3306)/golang_restful_api")
+	// Load environment variables
+	err := godotenv.Load()
+	helper.PanicIfError(err)
+
+	dbUser := os.Getenv("DB_USER")
+	dbPass := os.Getenv("DB_PASS")
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
+
+	// Buat DSN dari variabel lingkungan
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", dbUser, dbPass, dbHost, dbPort, dbName)
+
+	db, err := sql.Open("mysql", dsn)
 	helper.PanicIfError(err)
 
 	db.SetConnMaxLifetime(time.Minute * 60)
