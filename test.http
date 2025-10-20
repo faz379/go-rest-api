@@ -34,7 +34,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "title": "",
+  "title": "wkwkwkwwkwwk",
   "content": "ASFBASOIVBASVNBIASNVSANVPOANSVPOSANV",
   "image_url": "www.image.com/alsya.jpg"
 }
@@ -51,7 +51,8 @@ Content-Type: application/json
 }
 
 ### GET PRODUCT BY ID
-GET http://localhost:5000/api/products/9
+GET http://localhost:5000/api/posts/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTA3ODQzOSwiaWF0IjoxNzYwOTkyMDM5fQ.aBxS6IdFiSEmyjVNS3wcvPoQYv6qOmfguRa42NJnvnk
 Accept: application/json
 
 
@@ -68,4 +69,13 @@ Content-Type: application/json
   "title": "SAHRONI MASUK KADANG",
   "content": "ASFBASOIVBASVNBIASNVSANVPOANSVPOSANV",
   "image_url": "www.image.com/alsya.jpg"
+}
+
+### CREATE COMMENT
+POST http://localhost:5000/api/posts/100/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTA3ODQzOSwiaWF0IjoxNzYwOTkyMDM5fQ.aBxS6IdFiSEmyjVNS3wcvPoQYv6qOmfguRa42NJnvnk
+Content-Type: application/json
+
+{
+  "content": "WOKWOKWOWKOWKOWK"
 }

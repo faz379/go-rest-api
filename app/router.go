@@ -8,7 +8,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func NewRouter(postController controller.PostController, userController *controller.UserControllerImpl) *httprouter.Router {
+func NewRouter(postController controller.PostController, userController *controller.UserControllerImpl, commentController controller.CommentController) *httprouter.Router {
 	router := httprouter.New()
 
 	router.POST("/api/users/register", func(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
@@ -26,6 +26,8 @@ func NewRouter(postController controller.PostController, userController *control
 	router.POST("/api/posts", postController.Create)
 	router.PUT("/api/posts/:postId", postController.Update)
 	router.DELETE("/api/posts/:postId", postController.Delete)
+
+	router.POST("/api/posts/:postId/comments", commentController.Create)
 
 	router.PanicHandler = exception.ErrorHandler
 

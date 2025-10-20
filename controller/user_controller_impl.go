@@ -63,7 +63,7 @@ func (controller *UserControllerImpl) Login(writer http.ResponseWriter, request 
 func (controller *UserControllerImpl) Logout(writer http.ResponseWriter, request *http.Request) {
 	webResponse := web.WebResponse{
 		Code:   http.StatusOK,
-		Status: "LOGOUT SUCCESS",
+		Status: "Logged Out",
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)

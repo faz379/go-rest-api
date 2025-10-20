@@ -29,8 +29,12 @@ func main() {
 	userService := service.NewUserService(userRepository, db, validate)
 	userController := controller.NewUserController(userService)
 
+	comentRepository := repository.NewCommentRepository()
+	commentService := service.NewCommentService(comentRepository, postRepository, db, validate)
+	commentController := controller.NewCommentController(commentService)
+
 	// ====== ROUTER SETUP ======
-	router := app.NewRouter(postController, userController)
+	router := app.NewRouter(postController, userController, commentController)
 
 	// ====== SERVER SETUP ======
 	server := http.Server{
