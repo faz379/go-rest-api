@@ -10,8 +10,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "username": "alsya123",
-  "email": "alsya007@gmail.com",
+  "username": "fazel123",
+  "email": "alsya008@gmail.com",
   "password": "alsya123"
 }
 
@@ -21,7 +21,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "alsya007@gmail.com",
+  "email": "alsya008@gmail.com",
   "password": "alsya123"
 }
 
@@ -29,19 +29,18 @@ Content-Type: application/json
 ### CREAT NEW POST
 
 POST http://localhost:5000/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTA4MTM4MCwiaWF0IjoxNzYwOTk0OTgwfQ.BkFRIouLDzczouD3cKIAulU6oVFmWAzkTeQpYM5prgs
-Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTIzODUxMSwiaWF0IjoxNzYxMTUyMTExfQ.Ou7HWPpLf5AAAWpmbBvQ1SdFuwWut3qK8_rzP8Qr-28
 Content-Type: application/json
 
 {
-  "title": "wkwkwkwwkwwk",
-  "content": "ASFBASOIVBASVNBIASNVSANVPOANSVPOSANV",
-  "image_url": "www.image.com/alsya.jpg"
+  "title": "SAHRONI MASUK KADANG BABI DAN DITANGKAP POLISI SUMPAH 3",
+  "content": "INI BERITA HOAX KEDUA",
+  "image_url": "www.image.com/fazel225.jpg"
 }
 
 ### GET PRODUCT BY ID
 GET http://localhost:5000/api/posts/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTA4MTM4MCwiaWF0IjoxNzYwOTk0OTgwfQ.BkFRIouLDzczouD3cKIAulU6oVFmWAzkTeQpYM5prgs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTIzODUxMSwiaWF0IjoxNzYxMTUyMTExfQ.Ou7HWPpLf5AAAWpmbBvQ1SdFuwWut3qK8_rzP8Qr-28
 Accept: application/json
 
 
@@ -51,8 +50,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc
 Accept: application/json
 
 ### UPDATE NEW POST
-PUT http://localhost:5000/api/posts/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTA4MTM4MCwiaWF0IjoxNzYwOTk0OTgwfQ.BkFRIouLDzczouD3cKIAulU6oVFmWAzkTeQpYM5prgs
+PUT http://localhost:5000/api/posts/10
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0MTA4NywiaWF0IjoxNzYxMTU0Njg3fQ.-T_N_t9AijJflT43sCNs9kd33hZ3jW-_st0EKCF2vQQ
 Content-Type: application/json
 
 {
@@ -62,8 +61,8 @@ Content-Type: application/json
 }
 
 ### CREATE COMMENT
-POST http://localhost:5000/api/posts/1/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTA4MTM4MCwiaWF0IjoxNzYwOTk0OTgwfQ.BkFRIouLDzczouD3cKIAulU6oVFmWAzkTeQpYM5prgs
+POST http://localhost:5000/api/posts/99/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0MTA4NywiaWF0IjoxNzYxMTU0Njg3fQ.-T_N_t9AijJflT43sCNs9kd33hZ3jW-_st0EKCF2vQQ
 Content-Type: application/json
 
 {

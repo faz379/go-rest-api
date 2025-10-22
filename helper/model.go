@@ -7,11 +7,12 @@ import (
 
 func ToPostResponse(post domain.Post) web.PostResponse {
 	return web.PostResponse{
-		Id:       post.Id,
-		Title:    post.Title,
-		Content:  post.Content,
-		ImageURL: post.ImageURL,
-		AuthorId: post.AuthorId,
+		Id:        post.Id,
+		Title:     post.Title,
+		Content:   post.Content,
+		ImageURL:  post.ImageURL,
+		AuthorId:  post.AuthorId,
+		CreatedAt: post.CreatedAt,
 	}
 }
 

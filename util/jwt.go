@@ -1,7 +1,6 @@
 package util
 
 import (
-	"belajar-rest-api-golang/helper"
 	"errors"
 	"os"
 	"time"
@@ -9,7 +8,13 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var JwtSecret = []byte(os.Getenv("JWT_SECRET"))
+func getJwtSecret() []byte {
+	secret := os.Getenv("JWT_SECRET")
+	if secret == "" {
+		panic("JWT_SECRET environment variable is not set")
+	}
+	return []byte(secret)
+}
 
 type JwtCustomClaims struct {
 	UserId int `json:"user_id"`
@@ -20,14 +25,14 @@ func GenerateToken(userId int, duration time.Duration) (string, error) {
 	claims := &JwtCustomClaims{
 		UserId: userId,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(2 * time.Hour)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(duration)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 			Issuer:    "belajar-rest-api-golang",
 		},
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString(JwtSecret)
+	return token.SignedString(getJwtSecret())
 }
 
 func ValidateToken(tokenString string) (*JwtCustomClaims, error) {
@@ -35,9 +40,11 @@ func ValidateToken(tokenString string) (*JwtCustomClaims, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, jwt.ErrTokenMalformed
 		}
-		return JwtSecret, nil
+		return getJwtSecret(), nil
 	})
-	helper.PanicIfError(err)
+	if err != nil {
+		return nil, err // Jangan panic di sini, cukup return error
+	}
 
 	if claims, ok := token.Claims.(*JwtCustomClaims); ok && token.Valid {
 		return claims, nil

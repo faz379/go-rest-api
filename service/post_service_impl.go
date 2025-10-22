@@ -3,6 +3,7 @@ package service
 import (
 	"belajar-rest-api-golang/exception"
 	"belajar-rest-api-golang/helper"
+	"belajar-rest-api-golang/middleware"
 	"belajar-rest-api-golang/model/domain"
 	"belajar-rest-api-golang/model/web"
 	"belajar-rest-api-golang/repository"
@@ -59,6 +60,17 @@ func (service *PostServiceImpl) Update(ctx context.Context, request web.PostUpda
 		panic(exception.NewNotFoundError(err.Error()))
 	}
 
+	// Ambil user ID dari context
+	userId := middleware.GetUserIDFromContext(ctx)
+	if userId == 0 {
+		panic(exception.NewUnauthorizedError("User ID not found in context"))
+	}
+
+	// Cek apakah user adalah pemilik post
+	if post.AuthorId != userId {
+		panic(exception.NewUnauthorizedError("You are not allowed to update this post"))
+	}
+
 	post.Title = request.Title
 	post.Content = request.Content
 	post.ImageURL = request.ImageURL
@@ -76,6 +88,16 @@ func (service *PostServiceImpl) Delete(ctx context.Context, postId int) {
 	post, err := service.PostRepository.FindById(ctx, tx, postId)
 	if err != nil {
 		panic(exception.NewNotFoundError(err.Error()))
+	}
+
+	userId := middleware.GetUserIDFromContext(ctx)
+	if userId == 0 {
+		panic(exception.NewUnauthorizedError("User ID not found in context"))
+	}
+
+	// Cek apakah user adalah pemilik post
+	if post.AuthorId != userId {
+		panic(exception.NewUnauthorizedError("You are not allowed to delete this post"))
 	}
 
 	service.PostRepository.Delete(ctx, tx, post)

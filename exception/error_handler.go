@@ -19,6 +19,10 @@ func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interfa
 		return
 	}
 
+	if unauthorizedError(writer, request, err) {
+		return
+	}
+
 	internalServerError(writer, request, err)
 }
 
@@ -73,6 +77,20 @@ func notFoundError(writer http.ResponseWriter, request *http.Request, err interf
 		return false
 	}
 
+}
+
+func unauthorizedError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {
+	exception, ok := err.(UnauthorizedError)
+	if ok {
+		webResponse := web.WebResponse{
+			Code:   http.StatusForbidden, //403
+			Status: "Forbidden",
+			Data:   exception.Error(),
+		}
+		helper.WriteToResponseBody(writer, webResponse)
+		return true
+	}
+	return false
 }
 
 func internalServerError(writer http.ResponseWriter, request *http.Request, err interface{}) {
