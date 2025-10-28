@@ -21,7 +21,8 @@ func main() {
 
 	// ====== PRODUCT SETUP ======
 	postRepository := repository.NewPostRepository()
-	postService := service.NewPostService(postRepository, db, validate)
+	postCategoryRepository := repository.NewPostCategoryRepository()
+	postService := service.NewPostService(postRepository, postCategoryRepository, db, validate)
 	postController := controller.NewPostController(postService)
 
 	// ====== USER SETUP ======
@@ -33,8 +34,12 @@ func main() {
 	commentService := service.NewCommentService(comentRepository, postRepository, db, validate)
 	commentController := controller.NewCommentController(commentService)
 
+	categoryRepository := repository.NewCategoryRepository()
+	categoryService := service.NewCategoryService(categoryRepository, db, validate)
+	categoryController := controller.NewCategoryController(categoryService)
+
 	// ====== ROUTER SETUP ======
-	router := app.NewRouter(postController, userController, commentController)
+	router := app.NewRouter(postController, userController, commentController, categoryController)
 
 	// ====== SERVER SETUP ======
 	server := http.Server{

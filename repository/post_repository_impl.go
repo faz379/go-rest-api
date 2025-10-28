@@ -16,17 +16,17 @@ func NewPostRepository() PostRepository {
 }
 
 func (repository *PostRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, post domain.Post) domain.Post {
-	SQL := "INSERT INTO posts(title, content, image_url, author_id) VALUES (?, ?, ?, ?)"
-	result, err := tx.ExecContext(ctx, SQL, post.Title, post.Content, post.ImageURL, post.AuthorId)
+	SQL := "INSERT INTO posts(title, slug, content, image_url, author_id) VALUES (?, ?, ?, ?, ?)"
+	result, err := tx.ExecContext(ctx, SQL, post.Title, post.Slug, post.Content, post.ImageURL, post.AuthorId)
 	helper.PanicIfError(err)
 
 	id, err := result.LastInsertId()
 	helper.PanicIfError(err)
 
-	query := "SELECT id, title, content, image_url, author_id, created_at FROM posts WHERE id = ?"
+	query := "SELECT id, title, slug, content, image_url, author_id, created_at FROM posts WHERE id = ?"
 	row := tx.QueryRowContext(ctx, query, id)
 
-	err = row.Scan(&post.Id, &post.Title, &post.Content, &post.ImageURL, &post.AuthorId, &post.CreatedAt)
+	err = row.Scan(&post.Id, &post.Title, &post.Slug, &post.Content, &post.ImageURL, &post.AuthorId, &post.CreatedAt)
 	helper.PanicIfError(err)
 
 	return post

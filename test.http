@@ -10,8 +10,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "username": "fazel123",
-  "email": "alsya008@gmail.com",
+  "username": "",
+  "email": "alsya123@gmail.com",
   "password": "alsya123"
 }
 
@@ -21,7 +21,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "email": "alsya008@gmail.com",
+  "email": "alsya00900@gmail.com",
   "password": "alsya123"
 }
 
@@ -29,24 +29,25 @@ Content-Type: application/json
 ### CREAT NEW POST
 
 POST http://localhost:5000/api/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTIzODUxMSwiaWF0IjoxNzYxMTUyMTExfQ.Ou7HWPpLf5AAAWpmbBvQ1SdFuwWut3qK8_rzP8Qr-28
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
 Content-Type: application/json
 
 {
-  "title": "SAHRONI MASUK KADANG BABI DAN DITANGKAP POLISI SUMPAH 3",
-  "content": "INI BERITA HOAX KEDUA",
-  "image_url": "www.image.com/fazel225.jpg"
+  "title": "",
+  "content": "INI BERITA HOAX KELIMA",
+  "image_url": "www.image.com/fazel225.jpg",
+  "category_id": [1, 3, 5]
 }
 
 ### GET PRODUCT BY ID
-GET http://localhost:5000/api/posts/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTIzODUxMSwiaWF0IjoxNzYxMTUyMTExfQ.Ou7HWPpLf5AAAWpmbBvQ1SdFuwWut3qK8_rzP8Qr-28
+GET http://localhost:5000/api/posts/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0NDQwNSwiaWF0IjoxNzYxMTU4MDA1fQ.U1bQblonjdtRAkEgjXigvpxzgAkLDo_sSNyvEED-m-8
 Accept: application/json
 
 
 ### DELETE PRODUCT
-DELETE http://localhost:5000/api/posts/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTA3ODQzOSwiaWF0IjoxNzYwOTkyMDM5fQ.aBxS6IdFiSEmyjVNS3wcvPoQYv6qOmfguRa42NJnvnk
+DELETE http://localhost:5000/api/posts/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0MjY5NiwiaWF0IjoxNzYxMTU2Mjk2fQ.h_zuCwOtwoWsvy1OWTbbul-lMtWWEjbceW5YZb_A_vA
 Accept: application/json
 
 ### UPDATE NEW POST
@@ -61,10 +62,24 @@ Content-Type: application/json
 }
 
 ### CREATE COMMENT
-POST http://localhost:5000/api/posts/99/comments
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTI0MTA4NywiaWF0IjoxNzYxMTU0Njg3fQ.-T_N_t9AijJflT43sCNs9kd33hZ3jW-_st0EKCF2vQQ
+POST http://localhost:5000/api/posts/26/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
 Content-Type: application/json
 
 {
-  "content": "WOKWOKWOWKOWKOWKJAJAJAJAhahah"
+  "content": "HOAX JIRRR"
 }
+
+### CREAT NEW CATEGORY
+POST http://localhost:5000/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Content-Type: application/json
+
+{
+  "name": ""
+}
+
+### GET ALL CATEGORIES
+GET http://localhost:5000/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJpc3MiOiJiZWxhamFyLXJlc3QtYXBpLWdvbGFuZyIsImV4cCI6MTc2MTY5MzM4MiwiaWF0IjoxNzYxNjA2OTgyfQ.vj9Tc9J-oBFkwul1_tycjFNEJ6Sg8hWG9eEvKpwhCiA
+Accept: application/json

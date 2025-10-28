@@ -9,22 +9,31 @@ import (
 	"belajar-rest-api-golang/repository"
 	"context"
 	"database/sql"
+	"strings"
 
 	"github.com/go-playground/validator/v10"
 )
 
 type PostServiceImpl struct {
-	PostRepository repository.PostRepository
-	DB             *sql.DB
-	Validate       *validator.Validate
+	PostRepository         repository.PostRepository
+	PostCategoryRepository repository.PostCategoryRepository
+	DB                     *sql.DB
+	Validate               *validator.Validate
 }
 
-func NewPostService(postRepository repository.PostRepository, DB *sql.DB, validate *validator.Validate) PostService {
+func NewPostService(postRepository repository.PostRepository, postCategoryRepository repository.PostCategoryRepository, DB *sql.DB, validate *validator.Validate) PostService {
 	return &PostServiceImpl{
-		PostRepository: postRepository,
-		DB:             DB,
-		Validate:       validate,
+		PostRepository:         postRepository,
+		PostCategoryRepository: postCategoryRepository,
+		DB:                     DB,
+		Validate:               validate,
 	}
+}
+
+func generatePostSlug(title string) string {
+	slug := strings.ToLower(title)
+	slug = strings.ReplaceAll(slug, " ", "-")
+	return slug
 }
 
 func (service *PostServiceImpl) Create(ctx context.Context, request web.PostCreateRequest, userId int) web.PostResponse {
@@ -36,14 +45,21 @@ func (service *PostServiceImpl) Create(ctx context.Context, request web.PostCrea
 	defer helper.CommitOrRollback(tx)
 
 	post := domain.Post{
-		Id:       0,
-		Title:    request.Title,
-		Content:  request.Content,
-		ImageURL: request.ImageURL,
-		AuthorId: userId,
+		Id:         0,
+		Title:      request.Title,
+		Slug:       generatePostSlug(request.Title),
+		Content:    request.Content,
+		ImageURL:   request.ImageURL,
+		AuthorId:   userId,
+		CategoryId: request.CategoryId,
 	}
 
 	post = service.PostRepository.Save(ctx, tx, post)
+
+	if len(request.CategoryId) > 0 {
+		err := service.PostCategoryRepository.Create(ctx, tx, post.Id, request.CategoryId)
+		helper.PanicIfError(err)
+	}
 
 	return helper.ToPostResponse(post)
 }

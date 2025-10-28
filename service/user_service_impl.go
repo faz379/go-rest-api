@@ -1,6 +1,7 @@
 package service
 
 import (
+	"belajar-rest-api-golang/exception"
 	"belajar-rest-api-golang/helper"
 	"belajar-rest-api-golang/model/domain"
 	"belajar-rest-api-golang/model/web"
@@ -29,15 +30,13 @@ func NewUserService(userRepository repository.UserRepository, db *sql.DB, valida
 }
 
 func (service *UserServiceImpl) Login(ctx context.Context, tx *sql.Tx, request web.UserLoginRequest) (string, error) {
-	if request.Email == "" {
-		return "", fmt.Errorf("email tidak boleh kosong")
-	}
-	if request.Password == "" {
-		return "", fmt.Errorf("password tidak boleh kosong")
+	// Validasi input
+	err := service.Validate.Struct(request)
+	if err != nil {
+		return "", err
 	}
 
 	// Jika tx nil, buka transaction baru
-	var err error
 	if tx == nil {
 		tx, err = service.DB.BeginTx(ctx, nil)
 		if err != nil {
@@ -48,11 +47,11 @@ func (service *UserServiceImpl) Login(ctx context.Context, tx *sql.Tx, request w
 
 	user, err := service.UserRepository.FindByEmail(ctx, tx, request.Email)
 	if err != nil {
-		return "", fmt.Errorf("user tidak ditemukan")
+		return "", exception.NewErrorLogin("email not registered")
 	}
 
 	if !util.CheckPassword(user.Password, request.Password) {
-		return "", fmt.Errorf("password salah")
+		return "", exception.NewErrorLogin("invalid password")
 	}
 
 	token, err := util.GenerateToken(user.Id, time.Hour*24)
@@ -65,14 +64,9 @@ func (service *UserServiceImpl) Login(ctx context.Context, tx *sql.Tx, request w
 
 func (service *UserServiceImpl) Register(ctx context.Context, tx *sql.Tx, request web.UserRegisterRequest) (web.UserResponse, error) {
 	// Validasi input
-	if request.Username == "" {
-		return web.UserResponse{}, fmt.Errorf("username tidak boleh kosong")
-	}
-	if request.Email == "" {
-		return web.UserResponse{}, fmt.Errorf("email tidak boleh kosong")
-	}
-	if request.Password == "" {
-		return web.UserResponse{}, fmt.Errorf("password tidak boleh kosong")
+	err := service.Validate.Struct(request)
+	if err != nil {
+		return web.UserResponse{}, err
 	}
 
 	if tx == nil {

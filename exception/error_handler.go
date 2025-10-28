@@ -23,6 +23,10 @@ func ErrorHandler(writer http.ResponseWriter, request *http.Request, err interfa
 		return
 	}
 
+	if badRequestError(writer, request, err) {
+		return
+	}
+
 	internalServerError(writer, request, err)
 }
 
@@ -41,6 +45,8 @@ func validationErrors(writer http.ResponseWriter, request *http.Request, err int
 				message = "Email cannot be empty"
 			case "Password":
 				message = "Password cannot be empty"
+			case "Name":
+				message = "Name cannot be empty"
 			default:
 				message = fmt.Sprintf("%s cannot be empty", e.Field())
 			}
@@ -104,4 +110,18 @@ func internalServerError(writer http.ResponseWriter, request *http.Request, err 
 	}
 
 	helper.WriteToResponseBody(writer, webResponse)
+}
+
+func badRequestError(writer http.ResponseWriter, request *http.Request, err interface{}) bool {
+	ex, ok := err.(*ErrorLogin)
+	if ok {
+		webResponse := web.WebResponse{
+			Code:   http.StatusBadRequest,
+			Status: "Bad Request",
+			Data:   ex.Message,
+		}
+		helper.WriteToResponseBody(writer, webResponse)
+		return true
+	}
+	return false
 }
